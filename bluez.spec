@@ -176,6 +176,7 @@ mkdir -p $RPM_BUILD_ROOT/%{_libdir}/bluetooth/
 
 %files
 %doc AUTHORS COPYING ChangeLog README
+%{_bindir}/hex2hcd
 %{_bindir}/ciptool
 %{_bindir}/hcitool
 %{_bindir}/l2ping
