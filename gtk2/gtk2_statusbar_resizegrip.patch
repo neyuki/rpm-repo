@@ -1,0 +1,11 @@
+--- gtk/gtkstatusbar.c.orig	2015-03-30 19:37:57.290730011 +0300
++++ gtk/gtkstatusbar.c	2015-03-30 19:38:24.052656210 +0300
+@@ -211,7 +211,7 @@
+   box->spacing = 2;
+   box->homogeneous = FALSE;
+ 
+-  statusbar->has_resize_grip = TRUE;
++  statusbar->has_resize_grip = FALSE;
+ 
+   gtk_widget_style_get (GTK_WIDGET (statusbar), "shadow-type", &shadow_type, NULL);
+   

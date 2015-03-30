@@ -1,0 +1,66 @@
+Index: gtknotebook.c
+===================================================================
+--- gtk/gtknotebook.c	(revision 20068)
++++ gtk/gtknotebook.c	(working copy)
+@@ -1865,12 +1865,14 @@
+ 		  gtk_widget_size_request (page->tab_label,
+ 					   &child_requisition);
+ 
+-		  page->requisition.width = 
+-		    child_requisition.width +
+-		    2 * widget->style->xthickness;
+-		  page->requisition.height = 
+-		    child_requisition.height +
+-		    2 * widget->style->ythickness;
++		  page->requisition.width = child_requisition.width;
++		  page->requisition.height = child_requisition.height;
++
++		  if (notebook->show_border)
++		    {
++		      page->requisition.width += 2 * widget->style->xthickness;
++		      page->requisition.height += 2 * widget->style->ythickness;
++		    }
+ 		  
+ 		  switch (notebook->tab_pos)
+ 		    {
+@@ -2085,12 +2087,17 @@
+ 
+       if (notebook->show_tabs || notebook->show_border)
+ 	{
+-	  child_allocation.x += widget->style->xthickness;
+-	  child_allocation.y += widget->style->ythickness;
+-	  child_allocation.width = MAX (1, child_allocation.width -
+-					widget->style->xthickness * 2);
+-	  child_allocation.height = MAX (1, child_allocation.height -
+-					 widget->style->ythickness * 2);
++	  if (notebook->show_border)
++	    {
++	      child_allocation.x += widget->style->xthickness;
++	      child_allocation.y += widget->style->ythickness;
++	      child_allocation.width -= widget->style->xthickness * 2;
++	      child_allocation.height -= widget->style->ythickness * 2;
++	    }
++	  
++          child_allocation.width = MAX (1, child_allocation.width);
++          child_allocation.height = MAX (1, child_allocation.height);
++	  
+ 
+ 	  if (notebook->show_tabs && notebook->children && notebook->cur_page)
+ 	    {
+@@ -4578,6 +4585,8 @@
+   else
+     page = notebook->cur_page;
+ 
++  if (notebook->show_border)
++    {
+   switch (tab_pos)
+     {
+     case GTK_POS_TOP:
+@@ -4631,6 +4640,7 @@
+ 		     area, widget, "notebook",
+ 		     x, y, width, height,
+ 		     tab_pos, gap_x, gap_width);
++    }
+ 
+   showarrow = FALSE;
+   children = gtk_notebook_search_page (notebook, NULL, step, TRUE);
