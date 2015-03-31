@@ -1,8 +1,13 @@
-Modified and more latest versions packages for current Fedora
--------------------------------------------------------------
+Modified and more latest version packages for current Fedora
+------------------------------------------------------------
 
   # dnf copr enable neyuki/origin
   # dnf check-update
   # dnf upgrade
 
+GTK2 with addition patches
+~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+- GtkNotebook tab and scrollbar border patch
+- Resize grip for statusbar is off by default
 
