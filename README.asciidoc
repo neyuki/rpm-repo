@@ -1,0 +1,8 @@
+Modified and more latest versions packages for current Fedora
+-------------------------------------------------------------
+
+  # dnf copr enable neyuki/origin
+  # dnf check-update
+  # dnf upgrade
+
+
